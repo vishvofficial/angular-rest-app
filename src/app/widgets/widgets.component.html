@@ -1,0 +1,14 @@
+<div class="container">
+  <!-- WIDGETS LIST -->
+    <app-widgets-list class="col-50" [readonly]="readonly"
+      [widgets]="widgets"
+      (selected)="selectWidget($event)"
+      (deleted)="deleteWidget($event)"
+    ></app-widgets-list>
+  <!-- WIDGET DETAILS -->
+    <app-widget-details class="col-50"
+      [widget]= 'selectedWidget'
+      (saved)="saveWidget($event)"
+      (cancelled)="cancel($event)"
+    ></app-widget-details>
+</div>

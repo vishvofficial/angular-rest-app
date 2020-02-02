@@ -1,0 +1,29 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>
+      <h1>
+        <span *ngIf="selectedWidget.id; else prompt">Editing {{ originalName }}</span>
+        <ng-template #prompt>Create a Widget</ng-template>
+      </h1>
+    </md-card-title>
+  </md-card-header>
+  <form *ngIf="selectedWidget" #formModel='ngForm' (submit)="saved.emit(selectedWidget);formModel.resetForm(true)">
+    <md-card-content>
+      <md-input-container class="full-width">
+        <label>
+          <input mdInput type="text" name="name" placeholder="Widget Name" [(ngModel)]="selectedWidget.name" required>
+        </label>
+      </md-input-container>
+      <md-input-container class="full-width">
+        <label>
+          <input mdInput type="text" name="description" placeholder="Widget Description" [(ngModel)]="selectedWidget.description" required>
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions>
+      <button type="submit" md-button [disabled]="!formModel.valid">Save</button>
+      <button type="button" md-button (click)="cancelled.emit(selectedWidget);formModel.resetForm(true)">Cancel</button>
+    </md-card-actions>
+  </form>
+</md-card>
+

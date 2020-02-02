@@ -1,0 +1,29 @@
+<script src="item-detail.component.ts"></script>
+<md-card>
+  <md-card-header>
+    <md-card-title>
+      <h1>
+        <span *ngIf="selectedItem.id; else prompt">Editing {{originalName}}</span>
+        <ng-template #prompt>Create a Item</ng-template>
+      </h1>
+    </md-card-title>
+  </md-card-header>
+  <form (submit)="saved.emit(selectedItem);formRef.resetForm(true)" #formRef='ngForm'>
+    <md-card-content>
+      <md-input-container class="full-width">
+        <label>
+        <input mdInput placeholder="Name" [(ngModel)]="selectedItem.name" name="name" type="text" required>
+        </label>
+      </md-input-container>
+      <md-input-container class="full-width">
+        <label>
+        <input mdInput placeholder="Description" [(ngModel)]="selectedItem.description" type="text" name="description" required>
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions>
+      <button type="submit" md-button [disabled]="!formRef.valid">Save</button>
+      <button type="button" md-button (click)="cancelled.emit(selectedItem);formRef.resetForm(true)">Cancel</button>
+    </md-card-actions>
+  </form>
+</md-card>
